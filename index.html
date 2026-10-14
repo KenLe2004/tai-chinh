@@ -11,19 +11,40 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Tài chính">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#f7f6f3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#121815">
 <style>
-  :root{--bg:#f7f6f3;--ink:#1f1f1d;--ink2:#6b6a66}
-  @media (prefers-color-scheme: dark){:root{--bg:#141413;--ink:#f0efec;--ink2:#b5b4ad}}
-  html,body{margin:0;height:100%;background:var(--bg);overflow:hidden}
-  #splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--bg);color:var(--ink2);font:14px system-ui,-apple-system,"Segoe UI",Arial,sans-serif;transition:opacity .25s;z-index:2}
+  :root{--bg:#f7f6f3;--card:#ffffff;--ink:#1f1f1d;--ink2:#6b6a66;--line:#e4e2dc;--acc:#2f7d5b;--accInk:#ffffff}
+  @media (prefers-color-scheme: dark){:root{--bg:#121815;--card:#1a221e;--ink:#f0efec;--ink2:#b5b4ad;--line:#2a332e;--acc:#4fb88a;--accInk:#0d1310}}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+  .card{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 22px;text-align:center}
+  .logo{width:80px;height:80px;border-radius:20px;display:block;margin:0 auto 14px}
+  h1{font-size:22px;margin:0 0 6px}
+  p{margin:0 0 18px;color:var(--ink2)}
+  .btn{display:block;width:100%;padding:13px 16px;border-radius:12px;border:0;font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none;cursor:pointer;margin-top:10px}
+  .main{background:var(--acc);color:var(--accInk)}
+  .sub{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .hint{display:none;text-align:left;font-size:14px;color:var(--ink2);background:var(--bg);border-radius:12px;padding:12px 14px;margin-top:12px}
+  .hint b{color:var(--ink)}
+  .hidden{display:none}
+  #splash{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--bg);color:var(--ink2)}
   #splash img{width:72px;height:72px;border-radius:18px}
   #splash a{color:var(--ink2);font-size:13px;opacity:0;transition:opacity .3s}
   #splash.slow a{opacity:1}
 </style>
 </head>
 <body>
+<div class="wrap" id="install">
+  <div class="card">
+    <img class="logo" src="icon-192.png" alt="">
+    <h1>Tài chính</h1>
+    <p id="lead">Cài app lên điện thoại để mở dashboard chi tiêu bằng một chạm.</p>
+    <button class="btn main hidden" id="btnInstall">Cài đặt ứng dụng</button>
+    <div class="hint" id="hint">Bấm <b>menu 3 chấm</b> của Chrome ở góc trên => chọn <b>Cài đặt ứng dụng</b> (hoặc <b>Thêm vào màn hình chính</b> => <b>Cài đặt</b>).</div>
+    <a class="btn sub" id="btnOpen">Mở dashboard</a>
+  </div>
+</div>
 <div id="splash">
   <img src="icon-192.png" alt="">
   <span>Đang mở dashboard...</span>
@@ -31,12 +52,41 @@
 </div>
 <script>
   // Link dashboard Apps Script. Link này không chứa dữ liệu; chỉ tài khoản Google của chủ mới xem được dashboard.
-  // Google không cho nhúng dashboard vào khung khi chỉ chủ tài khoản được xem, nên app mở thẳng link này.
+  // Trang này phải đứng yên khi mở bằng trình duyệt thường, để Chrome nhận ra app và cho cài.
+  // Khi mở từ app đã cài (chế độ standalone hoặc ?app=1), trang chuyển thẳng sang dashboard.
   var DASH = 'https://script.google.com/macros/s/AKfycbzqmMoACsKCmJ4OlA82o20JJ82MQoThhsnVxHHJs0Fz-JQEYu9ZPwYhyMPpL2bRa8lgVQ/exec';
-  document.getElementById('direct').href = DASH;
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-  setTimeout(function(){ document.getElementById('splash').classList.add('slow'); }, 4000);
-  setTimeout(function(){ location.replace(DASH); }, 400);
+  document.getElementById('btnOpen').href = DASH;
+  document.getElementById('direct').href = DASH;
+
+  var inApp = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) ||
+              window.navigator.standalone === true ||
+              /(^|[?&])app=1(&|$)/.test(location.search);
+
+  if (inApp) {
+    document.getElementById('install').style.display = 'none';
+    var s = document.getElementById('splash');
+    s.style.display = 'flex';
+    setTimeout(function(){ s.classList.add('slow'); }, 4000);
+    setTimeout(function(){ location.replace(DASH); }, 300);
+  } else {
+    var deferred = null, btn = document.getElementById('btnInstall'), hint = document.getElementById('hint');
+    window.addEventListener('beforeinstallprompt', function(e){
+      e.preventDefault(); deferred = e;
+      btn.classList.remove('hidden'); hint.style.display = 'none';
+    });
+    btn.addEventListener('click', function(){
+      if (!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function(){ deferred = null; btn.classList.add('hidden'); });
+    });
+    window.addEventListener('appinstalled', function(){
+      document.getElementById('lead').textContent = 'Đã cài xong. Mở app Tài chính từ màn hình chính.';
+      btn.classList.add('hidden'); hint.style.display = 'none';
+    });
+    // Nếu sau 2,5 giây Chrome chưa đưa nút cài, hiện hướng dẫn cài qua menu.
+    setTimeout(function(){ if (!deferred) hint.style.display = 'block'; }, 2500);
+  }
 </script>
 </body>
 </html>
