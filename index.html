@@ -264,6 +264,55 @@ a.bill{white-space:nowrap}
 .keyform button{border:0;border-radius:10px;padding:8px 16px;font:inherit;font-weight:600;background:#139a69;color:#fff;cursor:pointer}
 .inst{margin-left:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;cursor:pointer}
 .brand{flex-wrap:wrap}
+
+/* ===== v11: anh tự thêm khoản thu chi ===== */
+.fab{position:fixed;right:max(16px,calc(50vw - 320px + 16px));bottom:calc(24px + env(safe-area-inset-bottom));z-index:8;width:56px;height:56px;border-radius:18px;border:0;background:#139a69;color:#fff;box-shadow:0 6px 20px rgba(19,154,105,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.fab svg{width:26px;height:26px;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;fill:none}
+.fab:active{transform:scale(.96)}
+.fab.hide,.fab .qn.hide{display:none}
+.fab .qn{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:var(--warn);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 5px}
+@media (max-width:640px){ .fab{right:16px;bottom:calc(84px + env(safe-area-inset-bottom))} }
+.sheet{position:fixed;inset:0;z-index:25;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet.hide{display:none}
+.sbox{background:var(--surface);width:min(560px,100%);max-height:94vh;max-height:94dvh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;animation:sup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes sup{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (min-width:641px){ .sheet{align-items:center;padding:16px} .sbox{border-radius:20px} }
+@media (prefers-reduced-motion: reduce){ .sbox{animation:none} }
+.shead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}
+.shead b{font-size:17px;font-weight:600}
+.sbody{overflow-y:auto;padding:4px 16px 8px;-webkit-overflow-scrolling:touch}
+.sfoot{padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.seg{display:flex;background:var(--surface-2);border-radius:12px;padding:3px;gap:2px}
+.seg button{flex:1;border:0;background:transparent;font:inherit;font-size:14px;font-weight:500;color:var(--ink-2);padding:8px 4px;border-radius:9px;cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.seg.sm button{font-size:13px;padding:6px 2px}
+.fl{display:block;font-size:12.5px;font-weight:600;color:var(--ink-2);margin:14px 0 6px}
+.amtin{display:flex;align-items:baseline;gap:6px;border-bottom:2px solid var(--line);padding:4px 0}
+.amtin:focus-within{border-color:#139a69}
+.amtin input{border:0;background:transparent;padding:0;font-size:34px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;width:100%;min-width:0;outline:none;color:var(--ink)}
+.amtin span{font-size:18px;font-weight:600;color:var(--ink-2)}
+.amtin.chi input{color:var(--chi)} .amtin.thu input{color:var(--thu)}
+.k000{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font:inherit;font-size:13px;font-weight:600;border-radius:8px;padding:4px 9px;cursor:pointer;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:13.5px;padding:7px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chips button.on{border-color:#139a69;background:rgba(19,154,105,.12);color:var(--ink);font-weight:600}
+.chips button .wi{width:22px;height:22px;border-radius:7px;background:transparent}
+.chips button .wi svg{width:16px;height:16px}
+.sbody input[type=text],.sbody input[type=date],.sbody input[type=time]{width:100%;min-width:0;font-size:16px;padding:10px 12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two .fl{margin-top:14px}
+.hint{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+.prev{font-size:13px;color:var(--ink-2);margin:0 0 10px;min-height:18px}
+.prev b{color:var(--ink);font-weight:600}
+.prev.bad b{color:var(--bad)}
+.ferr{font-size:13px;color:var(--bad);margin:0 0 8px}
+.save{width:100%;border:0;border-radius:12px;background:#139a69;color:#fff;font:inherit;font-size:16px;font-weight:600;padding:13px;cursor:pointer}
+.save:disabled{opacity:.45;cursor:default}
+.more2 summary{cursor:pointer;font-size:13px;color:var(--ink-2);margin-top:14px;list-style:none}
+.more2 summary::-webkit-details-marker{display:none}
+.toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--bg);font-size:14px;padding:10px 16px;border-radius:12px;max-width:min(420px,90vw);box-shadow:0 6px 24px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.pend{color:var(--warn);font-weight:600}
 </style>
 </head>
 <body>
@@ -347,6 +396,33 @@ a.bill{white-space:nowrap}
 
 </div>
 <div class="tip" id="tip"></div>
+<button class="fab hide" id="fab" type="button" aria-label="Thêm khoản thu chi"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="qn hide" id="fabq"></span></button>
+<div class="sheet hide" id="addSheet" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+  <form class="sbox" id="addForm" autocomplete="off" novalidate>
+    <div class="shead"><b id="addTitle">Thêm khoản</b><button type="button" class="mclose" id="addClose" aria-label="Đóng">×</button></div>
+    <div class="sbody">
+      <div class="seg" id="fType" role="tablist"><button type="button" data-v="Chi" class="on">Chi</button><button type="button" data-v="Thu">Thu</button><button type="button" data-v="Chuyển">Chuyển ví</button><button type="button" data-v="Nợ">Nợ</button></div>
+      <div id="debtBox" class="hide" style="margin-top:8px">
+        <div class="seg sm" id="fDebt"><button type="button" data-v="Cho vay" class="on">Cho vay</button><button type="button" data-v="Thu nợ">Thu nợ</button><button type="button" data-v="Vay">Vay</button><button type="button" data-v="Trả vay">Trả vay</button></div>
+        <div class="hint" id="debtHint"></div>
+      </div>
+      <label class="fl" for="fAmt">Số tiền</label>
+      <div class="amtin chi" id="amtBox"><input id="fAmt" inputmode="numeric" enterkeyhint="next" placeholder="0" aria-label="Số tiền"><span>đ</span><button type="button" class="k000" id="k000" aria-label="Thêm ba số 0">000</button></div>
+      <label class="fl" for="fDesc">Nội dung</label>
+      <input type="text" id="fDesc" list="descList" maxlength="200" placeholder="Ví dụ: Cơm trưa" enterkeyhint="done"><datalist id="descList"></datalist>
+      <div id="catBox"><span class="fl">Danh mục</span><div class="chips" id="fCat"></div></div>
+      <div id="salBox" class="hide"><span class="fl">Loại khoản thu</span><div class="chips" id="fSal"><button type="button" data-v="">Thu khác</button><button type="button" data-v="Lương">Lương</button></div></div>
+      <div id="personBox" class="hide"><label class="fl" for="fPerson">Người</label><input type="text" id="fPerson" list="personList" maxlength="60" placeholder="Ví dụ: Mèo"><datalist id="personList"></datalist></div>
+      <span class="fl" id="walletLbl">Ví</span><div class="chips" id="fWallet"></div>
+      <div id="toBox" class="hide"><span class="fl">Sang ví</span><div class="chips" id="fTo"></div></div>
+      <div class="two"><div><label class="fl" for="fDate">Ngày</label><input type="date" id="fDate"></div><div><label class="fl" for="fTime">Giờ</label><input type="time" id="fTime"></div></div>
+      <details class="more2"><summary>+ Ghi chú</summary><input type="text" id="fNote" maxlength="500" placeholder="Không bắt buộc" style="margin-top:8px"></details>
+    </div>
+    <div class="sfoot"><div class="prev" id="fPrev"></div><div class="ferr hide" id="fErr"></div><button type="submit" class="save" id="fSave" disabled>Lưu khoản</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <div class="modal hide" id="billModal" role="dialog" aria-modal="true">
   <div class="mbox">
     <div class="mhead"><b id="billTitle">Bill</b><button class="mclose" id="billClose" aria-label="Đóng">×</button></div>
@@ -796,12 +872,138 @@ $('keyform').onsubmit=function(e){ e.preventDefault(); var v=$('keyin').value.tr
 function refresh(d){ D=d; var t=pd(D.today); $('title').textContent='Tháng '+(t.getMonth()+1)+'/'+t.getFullYear(); show(window.CUR||'tq'); }
 function load(){
   var k=getKey(); if(!k){ askKey(); return; }
-  if(!D){ var c=null; try{ c=JSON.parse(read('tc_data')||'null'); }catch(e){} if(c && c.tx) boot(c); }
+  if(!D){ var c=null; try{ c=JSON.parse(read('tc_data')||'null'); }catch(e){} if(c && c.tx){ boot(mergePending(c)); $('fab').classList.remove('hide'); setQueue(queue()); } }
   fetch(API+'?k='+encodeURIComponent(k),{cache:'no-store'}).then(function(r){ return r.json(); }).then(function(d){
     if(d && d.error){ store('tc_key',null); store('tc_data',null); D=null; askKey('Mã không đúng, nhập lại giúp em'); return; }
-    store('tc_data',JSON.stringify(d)); if(D) refresh(d); else boot(d);
+    store('tc_data',JSON.stringify(d)); d=mergePending(d); if(D) refresh(d); else boot(d); $('fab').classList.remove('hide'); setQueue(queue()); flushQueue();
   }).catch(function(err){ if(!D) fail(err); });
 }
+
+// ===== v11: anh tự thêm khoản thu chi, gửi thẳng vào Google Sheet qua Apps Script =====
+var CATS=['Ăn uống','Thiết yếu','Di chuyển','Hóa đơn','Mua sắm','Đi chơi','Sức khỏe','Giáo dục','Trả nợ','Khác'];
+var WALLETS=['Tiền mặt','Momo','Vietinbank'];
+var DEBT_HINT={'Cho vay':'Mình trả trước hoặc cho mượn, người đó nợ mình. Tiền ra khỏi ví.','Thu nợ':'Người đó trả lại mình. Tiền vào ví.','Vay':'Mình mượn, hoặc người khác trả hộ mình. Tiền vào ví.','Trả vay':'Mình trả lại người đó. Tiền ra khỏi ví.'};
+var F={type:'Chi',debt:'Cho vay',cat:'',sal:'',wallet:'',to:''};
+function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(function(){ t.classList.remove('on'); },3200); }
+function queue(){ try{ return JSON.parse(read('tc_queue')||'[]')||[]; }catch(e){ return []; } }
+function setQueue(q){ store('tc_queue', q.length?JSON.stringify(q):null); var n=q.length; $('fabq').textContent=n; $('fabq').classList.toggle('hide',!n); }
+function realType(){ return F.type==='Nợ'?F.debt:F.type; }
+function amtVal(){ return +String($('fAmt').value).replace(/\D/g,'')||0; }
+function fmtAmt(){ var el=$('fAmt'), n=amtVal(); el.value=n?VND.format(n):''; }
+function nowHM(){ var d=new Date(); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+function chipHTML(list,sel,icon){ return list.map(function(v){ return '<button type="button" data-v="'+esc(v)+'" class="'+(v===sel?'on':'')+'">'+(icon?wIcon(v):'')+esc(v)+'</button>'; }).join(''); }
+function lastWallet(){ var t=D&&D.tx.slice().sort(byTime).filter(function(x){return x.type==='Chi';})[0]; return (t&&WALLETS.indexOf(t.wallet)>=0)?t.wallet:'Tiền mặt'; }
+function fillLists(){
+  var seen={}, desc=[], ppl={};
+  D.tx.slice().sort(byTime).forEach(function(t){ var k=t.desc.trim(); if(k && !seen[k] && desc.length<60){ seen[k]=1; desc.push(k); } if(t.person) ppl[t.person]=1; });
+  $('descList').innerHTML=desc.map(function(x){return '<option value="'+esc(x)+'">';}).join('');
+  $('personList').innerHTML=Object.keys(ppl).map(function(x){return '<option value="'+esc(x)+'">';}).join('');
+}
+function paintForm(){
+  var rt=realType();
+  [].forEach.call($('fType').children,function(b){ b.classList.toggle('on',b.dataset.v===F.type); });
+  [].forEach.call($('fDebt').children,function(b){ b.classList.toggle('on',b.dataset.v===F.debt); });
+  $('debtBox').classList.toggle('hide',F.type!=='Nợ'); $('debtHint').textContent=DEBT_HINT[F.debt]||'';
+  $('catBox').classList.toggle('hide',F.type!=='Chi'); $('salBox').classList.toggle('hide',F.type!=='Thu');
+  $('personBox').classList.toggle('hide',F.type!=='Nợ'); $('toBox').classList.toggle('hide',F.type!=='Chuyển');
+  $('walletLbl').textContent=F.type==='Chuyển'?'Từ ví':F.type==='Thu'||rt==='Thu nợ'||rt==='Vay'?'Tiền vào ví':'Trả bằng ví';
+  $('fCat').innerHTML=chipHTML(CATS,F.cat); $('fWallet').innerHTML=chipHTML(WALLETS,F.wallet,1); $('fTo').innerHTML=chipHTML(WALLETS,F.to,1);
+  [].forEach.call($('fSal').children,function(b){ b.classList.toggle('on',b.dataset.v===F.sal); });
+  var inflow=rt==='Thu'||rt==='Thu nợ'||rt==='Vay';
+  $('amtBox').className='amtin '+(rt==='Chi'?'chi':inflow?'thu':'');
+  $('addTitle').textContent=rt==='Chi'?'Thêm khoản chi':rt==='Thu'?'Thêm khoản thu':rt==='Chuyển'?'Chuyển giữa hai ví':'Thêm khoản nợ';
+  $('fDesc').placeholder=rt==='Chi'?'Ví dụ: Cơm trưa':rt==='Thu'?'Ví dụ: Lương tháng 10':rt==='Chuyển'?'Ví dụ: Nạp tiền vào Momo':'Ví dụ: Trà sữa của Mèo';
+  check();
+}
+function formTx(){
+  var rt=realType();
+  return {ngay:$('fDate').value, gio:$('fTime').value, loai:rt, noi_dung:$('fDesc').value.trim(), so_tien:amtVal(),
+    danh_muc:rt==='Chi'?F.cat:rt==='Thu'?F.sal:'', vi:F.wallet, vi_nhan:rt==='Chuyển'?F.to:'', nguoi:F.type==='Nợ'?$('fPerson').value.trim():'', ghi_chu:$('fNote').value.trim()};
+}
+function problems(t){
+  var e=[];
+  if(!(t.so_tien>0)) e.push('số tiền');
+  if(!t.noi_dung) e.push('nội dung');
+  if(t.loai==='Chi'&&!t.danh_muc) e.push('danh mục');
+  if(F.type==='Nợ'&&!t.nguoi) e.push('tên người');
+  if(!t.vi) e.push('ví');
+  if(t.loai==='Chuyển'&&(!t.vi_nhan||t.vi_nhan===t.vi)) e.push('ví nhận khác ví chuyển');
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(t.ngay)) e.push('ngày');
+  return e;
+}
+function asApp(t,id){ return {id:id||'Chờ gửi',date:t.ngay,type:t.loai,desc:t.noi_dung,amount:t.so_tien,cat:t.danh_muc||'',wallet:t.vi,to:t.vi_nhan||'',note:t.ghi_chu||'',receipt:'',at:id?'':t.ngay+'T'+(t.gio||'23:59'),time:t.gio||'',person:t.nguoi||'',pending:!id}; }
+function check(){
+  var t=formTx(), e=problems(t), pv=$('fPrev');
+  $('fSave').disabled=!!e.length;
+  if(e.length){ pv.className='prev'; pv.textContent=t.so_tien>0?'Còn thiếu: '+e.join(', ')+'.':''; return; }
+  // Xem trước: sau khoản này còn được chi bao nhiêu (tính đúng như dashboard)
+  var before=tqState(); D.tx.push(asApp(t,'x')); var after; try{ after=tqState(); } finally { D.tx.pop(); }
+  if(t.ngay.slice(0,7)!==D.today.slice(0,7)){ pv.className='prev'; pv.textContent='Khoản này thuộc tháng khác tháng hiện tại.'; return; }
+  var dRemain=after.remain-before.remain;
+  if(!dRemain){ pv.className='prev'; pv.textContent='Khoản này không làm đổi số tiền còn được chi.'; return; }
+  pv.className='prev'+(after.remain<0?' bad':'');
+  pv.innerHTML=after.remain<0?'Sau khoản này: <b>lố '+money(-after.remain)+'</b> vào tiền để dành.':'Sau khoản này: còn được chi <b>'+money(after.remain)+'</b>, tối đa <b>'+money(after.perDay)+'</b>/ngày.';
+}
+function openAdd(){
+  if(!D) return;
+  F={type:'Chi',debt:'Cho vay',cat:'',sal:'',wallet:lastWallet(),to:''};
+  $('addForm').reset(); $('fDate').value=iso(new Date()); $('fTime').value=nowHM(); $('fErr').classList.add('hide');
+  $('fSave').textContent='Lưu khoản'; fillLists(); paintForm();
+  $('toast').classList.remove('on'); $('addSheet').classList.remove('hide'); setTimeout(function(){ $('fAmt').focus(); },60);
+}
+function closeAdd(){ $('addSheet').classList.add('hide'); }
+function post(item){
+  return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({k:getKey(),cid:item.cid,tx:item.tx}),redirect:'follow'})
+    .then(function(r){ return r.json(); });
+}
+function mergePending(d){ var q=queue(); if(!q.length) return d; var c=JSON.parse(JSON.stringify(d)); q.forEach(function(it){ c.tx.push(asApp(it.tx)); }); return c; }
+var flushing=false;
+function flushQueue(){
+  var q=queue(); if(!q.length||flushing||!getKey()) return Promise.resolve();
+  flushing=true; var it=q[0];
+  return post(it).then(function(r){
+    if(r&&r.ok){ setQueue(queue().filter(function(x){return x.cid!==it.cid;})); if(r.data){ store('tc_data',JSON.stringify(r.data)); refresh(mergePending(r.data)); } toast('Đã gửi khoản chờ: '+it.tx.noi_dung+' ('+r.id+')'); flushing=false; return flushQueue(); }
+    if(r&&r.error==='unauthorized'){ flushing=false; return; }
+    setQueue(queue().filter(function(x){return x.cid!==it.cid;})); refresh(mergePending(JSON.parse(read('tc_data')||'null')||D));
+    toast('Không lưu được "'+it.tx.noi_dung+'": '+(r&&r.error||'lỗi')); flushing=false;
+  }).catch(function(){ flushing=false; });
+}
+$('fab').onclick=openAdd;
+$('addClose').onclick=closeAdd;
+$('addSheet').onclick=function(e){ if(e.target===$('addSheet')) closeAdd(); };
+document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !$('addSheet').classList.contains('hide')) closeAdd(); });
+$('fType').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.type=b.dataset.v; if(F.type!=='Chi') F.cat=''; paintForm(); };
+$('fDebt').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.debt=b.dataset.v; paintForm(); };
+$('fCat').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.cat=b.dataset.v; paintForm(); };
+$('fSal').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.sal=b.dataset.v; paintForm(); };
+$('fWallet').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.wallet=b.dataset.v; if(F.to===F.wallet) F.to=''; paintForm(); };
+$('fTo').onclick=function(e){ var b=e.target.closest('button'); if(!b) return; F.to=b.dataset.v; paintForm(); };
+$('fAmt').addEventListener('input',function(){ fmtAmt(); check(); });
+$('k000').onclick=function(){ var n=amtVal(); if(n){ $('fAmt').value=VND.format(n*1000); check(); } $('fAmt').focus(); };
+['fDesc','fPerson','fDate','fTime','fNote'].forEach(function(id){ $(id).addEventListener('input',check); $(id).addEventListener('change',check); });
+$('fDesc').addEventListener('change',function(){ // chọn lại nội dung cũ thì gợi ý luôn danh mục và ví của lần trước
+  var v=$('fDesc').value.trim(); if(!v||F.type!=='Chi') return;
+  var t=D.tx.slice().sort(byTime).filter(function(x){return x.type==='Chi'&&x.desc.trim()===v;})[0];
+  if(t){ if(!F.cat) F.cat=t.cat; paintForm(); }
+});
+$('addForm').onsubmit=function(e){
+  e.preventDefault(); var t=formTx(); if(problems(t).length) return;
+  var item={cid:Date.now().toString(36)+Math.random().toString(36).slice(2,8), tx:t};
+  var btn=$('fSave'); btn.disabled=true; btn.textContent='Đang lưu'; $('fErr').classList.add('hide');
+  post(item).then(function(r){
+    if(r&&r.ok){ store('tc_data',JSON.stringify(r.data)); refresh(mergePending(r.data)); closeAdd(); toast('Đã lưu '+r.id+': '+t.noi_dung+', '+money(t.so_tien)); return; }
+    btn.disabled=false; btn.textContent='Lưu khoản';
+    $('fErr').textContent=r&&r.error==='unauthorized'?'Mã truy cập không đúng nên chưa lưu được.':'Chưa lưu: '+(r&&r.error||'lỗi không rõ'); $('fErr').classList.remove('hide');
+  }).catch(function(){
+    // Mất mạng: giữ lại trên máy, có mạng thì tự gửi
+    var q=queue(); q.push(item); setQueue(q); D.tx.push(asApp(t)); refresh(D); closeAdd();
+    toast('Chưa có mạng. Đã giữ khoản này trên máy, có mạng em tự gửi.');
+  });
+};
+window.addEventListener('online',function(){ flushQueue(); });
+var _rx0=rxRow; rxRow=function(t){ var h=_rx0(t); return t.pending?h.replace('<span class="less">','<span class="less"><span class="pend">Chờ gửi</span> · '):h; };
+var _tx0=txRow; txRow=function(t,w){ var h=_tx0(t,w); return t.pending?h.replace('<div class="m">','<div class="m"><span class="pend">Chờ gửi</span> · '):h; };
+
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 var deferredInstall=null;
 window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferredInstall=e; $('installBtn').classList.remove('hide'); });
@@ -809,7 +1011,7 @@ $('installBtn').onclick=function(){ if(!deferredInstall) return; deferredInstall
 window.addEventListener('appinstalled',function(){ $('installBtn').classList.add('hide'); });
 document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible' && D) load(); });
 window.addEventListener('hashchange',function(){ if(/k=/.test(location.hash)){ $('keyform').classList.add('hide'); $('stxt').textContent='Đang tải'; load(); } });
-if (window.MOCK) boot(window.MOCK); else load();
+if (window.MOCK){ boot(window.MOCK); $('fab').classList.remove('hide'); } else load();
 </script>
 </body>
 </html>
